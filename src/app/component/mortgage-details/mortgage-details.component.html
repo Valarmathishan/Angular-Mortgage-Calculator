@@ -1,0 +1,22 @@
+<section class="container py-4">
+  <h3 class="text-primary">Mortgage Details</h3>
+  <!-- Displaying the calculated Motgage Details-->
+  <div class="row py-4">
+    <div class="col-md-3 h5">Number of Payments :</div>
+    <div class="col-md-8">{{ mortgageDetails.numberOfPaymentTerms }}</div>
+    <div class="col-md-3 h5">Mortgage Payment :</div>
+    <div class="col-md-8">{{ mortgageDetails.mortgagePayment | currency }}</div>
+    <div class="col-md-3 h5">Prepayment:</div>
+    <div class="col-md-8">
+      {{ mortgageDetails.prePaymentAmount | currency }}
+    </div>
+    <div class="col-md-3 h5">Principal Payments :</div>
+    <div class="col-md-8">
+      {{ mortgageDetails.principlePayment | currency }}
+    </div>
+    <div class="col-md-3 h5">Interest Payments :</div>
+    <div class="col-md-8">{{ mortgageDetails.interestPayment | currency }}</div>
+    <div class="col-md-3 h5">Total Cost :</div>
+    <div class="col-md-8">{{ mortgageDetails.totalCost | currency }}</div>
+  </div>
+</section>

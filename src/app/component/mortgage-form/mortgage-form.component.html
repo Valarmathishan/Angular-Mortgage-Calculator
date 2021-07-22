@@ -1,0 +1,167 @@
+<section class="container py-4">
+  <form
+    [formGroup]="paymentPlanForm"
+    class="row g-3"
+    (ngSubmit)="onSubmit()"
+    novalidate
+  >
+    <!-- Payment Plan Section -->
+    <div class="card p-0 me-4 col-md-5">
+      <h5 class="card-header bg-primary text-white">Payment Plan</h5>
+      <div class="card-body">
+        <div class="col-md-12">
+          <label for="mortgage-amount">Mortgage Amount: </label>
+          <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">$</div>
+            </div>
+            <input
+              type="number"
+              id="mortgage-amount"
+              class="form-control is-invalid"
+              min="0"
+              set=".01"
+              [class.is-invalid]="validateInput('mortgageAmount')"
+              formControlName="mortgageAmount"
+            />
+            <div class="invalid-feedback">
+              Please enter an amount greater than 0
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <label for="interst-rate">Interest Rate:</label>
+          <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">%</div>
+            </div>
+            <input
+              type="number"
+              id="interst-rate"
+              class="form-control"
+              formControlName="interstRate"
+              min="0"
+              step=".01"
+              [class.is-invalid]="validateInput('interstRate')"
+            />
+            <div class="invalid-feedback">
+              Please enter a percent greater than 0 and less than 100
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="amortization-period-year">Amortization Period: </label>
+            <select
+              id="amortization-period-year"
+              class="form-select"
+              formControlName="amortizationPeriodYear"
+              [class.is-invalid]="validateInput('amortizationPeriodYear')"
+            >
+              <option *ngFor="let year of amortizationYear" [value]="year">
+                {{ year == 1 ? year + " Year" : year + " Years" }}
+              </option>
+            </select>
+            <div class="invalid-feedback">
+              The amortization period must be equal to or greater than the term.
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="amortization-period-month"></label>
+            <select
+              id="amortization-period-month"
+              class="form-select"
+              formControlName="amortizationPeriodMonth"
+            >
+              <option value="0"></option>
+              <option *ngFor="let month of amortizationMonth" [value]="month">
+                {{ month == 1 ? month + " Month" : month + " Months" }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <label for="payment-frequency">Payment Frequency: </label>
+          <select
+            id="payment-frequency"
+            class="form-select"
+            formControlName="paymentFrequency"
+          >
+            <option *ngFor="let pf of paymentFrequnecy" [value]="pf.id">
+              {{ pf.value }}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-12">
+          <label for="term">Term: </label>
+          <select id="term" class="form-select" formControlName="term">
+            <option *ngFor="let tm of terms" [value]="tm">
+              {{ tm == 1 ? tm + " Year" : tm + " Years" }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <!-- Prepament Plan Section -->
+    <div class="card p-0 col-md-5">
+      <h5 class="card-header bg-primary text-white">Prepayment Plan</h5>
+      <div class="card-body">
+        <div class="col-md-12">
+          <label for="prepayment-amount">Prepayment Amount: </label>
+          <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">$</div>
+            </div>
+            <input
+              id="prepayment-amount"
+              type="number"
+              class="form-control"
+              formControlName="prepaymentAmount"
+              min="0"
+              step=".01"
+              [class.is-invalid]="validateInput('prepaymentAmount')"
+            />
+            <div class="invalid-feedback">
+              Please enter an amount greater than 0
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <label for="prepayment-frequency">Prepayment Frequency: </label>
+          <select
+            id="prepayment-frequency"
+            class="form-select"
+            formControlName="prepaymentFrequency"
+          >
+            <option *ngFor="let ppa of prePaymentAmt" [value]="[ppa.id]">
+              {{ ppa.value }}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-12">
+          <label for="startPayment">Start With Payment: </label>
+          <input
+            id="startPayment"
+            type="number"
+            class="form-control"
+            formControlName="startPayment"
+            min="0"
+            [class.is-invalid]="validateInput('startPayment')"
+          />
+          <div class="invalid-feedback">
+            Please enter a valid whole number greater than 0
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <button
+        type="submit"
+        [disabled]="!paymentPlanForm.valid"
+        class="col-md-2 me-2 btn btn-primary"
+      >
+        Calculate
+      </button>
+    </div>
+  </form>
+</section>
